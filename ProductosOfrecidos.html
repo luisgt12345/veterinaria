@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="utf-8">
+    <title>VetDog - Inicio</title>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <meta content="Página de inicio de VetDog" name="keywords">
+    <meta content="Bienvenido a VetDog, tu clínica veterinaria de confianza" name="description">
+
+    <!-- Favicon -->
+    <link href="img/favicon.ico" rel="icon">
+
+    <!-- Google Web Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Nunito+Sans&family=Nunito:wght@600;700;800&display=swap" rel="stylesheet"> 
+
+    <!-- Font Awesome -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
+
+    <!-- Flaticon Font -->
+    <link href="lib/flaticon/font/flaticon.css" rel="stylesheet">
+
+    <!-- Libraries Stylesheet -->
+    <link href="lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
+    <link href="lib/tempusdominus/css/tempusdominus-bootstrap-4.min.css" rel="stylesheet" />
+
+    <!-- Customized Bootstrap Stylesheet -->
+    <link href="css/style.css" rel="stylesheet">
+    <style>
+        /* Estilos personalizados */
+        .text-primary {
+            color: #87CEEB !important;
+        }
+        .btn-primary {
+            background-color: #87CEEB !important;
+            border-color: #87CEEB !important;
+        }
+        .btn-primary:hover {
+            background-color: #69b7da !important;
+            border-color: #69b7da !important;
+        }
+        .navbar-dark .navbar-nav .nav-link {
+            color: #ffffff;
+        }
+        .navbar-dark .navbar-nav .nav-link:hover {
+            color: #87CEEB;
+        }
+        .welcome-section {
+            background-color: #f9f9f9;
+            padding: 50px 0;
+            text-align: center;
+        }
+        .welcome-section h2 {
+            color: #87CEEB;
+            font-size: 36px;
+        }
+        .welcome-section p {
+            font-size: 18px;
+            color: #333;
+            margin-bottom: 30px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Navbar Start -->
+    <div class="container-fluid p-0">
+        <nav class="navbar navbar-expand-lg bg-dark navbar-dark py-3 py-lg-0 px-lg-5">
+            <a href="index.html" class="navbar-brand d-block d-lg-none">
+                <h1 class="m-0 display-5 text-capitalize font-italic text-white"><span class="text-primary">Vet</span>Dog</h1>
+            </a>
+            <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse justify-content-between px-3" id="navbarCollapse">
+                <div class="navbar-nav mr-auto py-0">
+                    <a href="LoginPersonal.html" class="nav-item nav-link">Inicio</a>
+                    <a href="clientes.html" class="nav-item nav-link">Clientes</a>
+                    <a href="ProductosOfrecidos.html" class="nav-item nav-link">Productos ofrecidos</a>
+                    <a href="provedores.html" class="nav-item nav-link">Proveedores</a>
+                    <a href="veterinarios.html" class="nav-item nav-link">Veterinarios</a>
+                    <a href="mascotas.html" class="nav-item nav-link">Mascotas</a>
+                    <a href="citas.html" class="nav-item nav-link">Citas</a>
+                    <a href="ventas.html" class="nav-item nav-link">Ventas</a>
+                </div>
+                <button id="generateReport" class="btn btn-lg btn-primary px-3 d-none d-lg-block">Generar Reporte</button>
+            </div>
+        </nav>
+    </div>
+    <!-- Navbar End -->
+
+    <!-- Productos Section Start -->
+    <div class="container">
+        <h2 class="text-primary mt-4">Productos Ofrecidos</h2>
+        <table class="table table-striped mt-3" id="productTable">
+            <thead>
+                <tr>
+                    <th>Nombre del Producto</th>
+                    <th>Descripción</th>
+                    <th>Precio (GTQ)</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Alimento para Perros</td>
+                    <td>Bolsa de 10 kg de alimento premium</td>
+                    <td>Q1750</td>
+                </tr>
+                <tr>
+                    <td>Juguete para Mascotas</td>
+                    <td>Pelota resistente para perros</td>
+                    <td>Q525</td>
+                </tr>
+                <!-- ... más filas de productos ... -->
+            </tbody>
+        </table>
+
+        <div class="form-section">
+            <h4>Agregar Nuevo Producto</h4>
+            <form id="addProductForm">
+                <div class="form-group">
+                    <label for="productName">Nombre del Producto</label>
+                    <input type="text" class="form-control" id="productName" required>
+                </div>
+                <div class="form-group">
+                    <label for="productDescription">Descripción</label>
+                    <input type="text" class="form-control" id="productDescription" required>
+                </div>
+                <div class="form-group">
+                    <label for="productPrice">Precio (GTQ)</label>
+                    <input type="number" class="form-control" id="productPrice" required>
+                </div>
+                <button type="submit" class="btn btn-primary">Agregar Producto</button>
+            </form>
+        </div>
+    </div>
+    <!-- Productos Section End -->
+
+    <!-- JavaScript Libraries -->
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script src="lib/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.4.0/jspdf.umd.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.12/jspdf.plugin.autotable.min.js"></script>
+    <script>
+        document.getElementById('addProductForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+            const productName = document.getElementById('productName').value;
+            const productDescription = document.getElementById('productDescription').value;
+            const productPrice = document.getElementById('productPrice').value;
+
+            const table = document.querySelector('tbody');
+            const newRow = `<tr>
+                <td>${productName}</td>
+                <td>${productDescription}</td>
+                <td>Q${productPrice}</td>
+            </tr>`;
+            table.insertAdjacentHTML('beforeend', newRow);
+
+            // Limpiar el formulario
+            document.getElementById('addProductForm').reset();
+        });
+
+        // Generar PDF al hacer clic en el botón
+        document.getElementById('generateReport').addEventListener('click', function() {
+            const { jsPDF } = window.jspdf;
+            const doc = new jsPDF();
+            const table = document.getElementById('productTable');
+            const rows = table.rows;
+            let pdfContent = [];
+
+            for (let i = 0; i < rows.length; i++) {
+                const row = rows[i].cells;
+                const rowData = [];
+                for (let j = 0; j < row.length; j++) {
+                    rowData.push(row[j].innerText);
+                }
+                pdfContent.push(rowData);
+            }
+
+            doc.autoTable({
+                head: [pdfContent[0]],
+                body: pdfContent.slice(1),
+            });
+
+            doc.save('productos_ofrecidos.pdf');
+        });
+    </script>
+
+</body>
+
+</html>

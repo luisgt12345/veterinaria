@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="utf-8">
+    <title>VetDog - Citas</title>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <meta content="Citas veterinarias VetDog" name="keywords">
+    <meta content="Formulario para agendar citas veterinarias" name="description">
+
+    <!-- Google Web Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Nunito+Sans&display=swap" rel="stylesheet">
+
+    <!-- Font Awesome -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
+
+    <!-- Customized Bootstrap Stylesheet -->
+    <link href="css/style.css" rel="stylesheet">
+
+    <style>
+        body {
+            font-family: 'Nunito Sans', sans-serif;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 50px auto;
+            padding: 20px;
+            background-color: #f9f9f9;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+
+        h2 {
+            color: #87CEEB;
+            text-align: center;
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
+        .description {
+            font-size: 0.9em;
+            color: #666;
+            margin-bottom: 5px;
+        }
+
+        .btn-primary {
+            background-color: #87CEEB;
+            border: none;
+            padding: 10px 20px;
+            color: white;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+
+        .btn-primary:hover {
+            background-color: #69b7da;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Navbar Start -->
+    <div class="container-fluid p-0">
+        <nav class="navbar navbar-expand-lg bg-dark navbar-dark py-3 py-lg-0 px-lg-5">
+            <a href="index.html" class="navbar-brand d-block d-lg-none">
+                <h1 class="m-0 display-5 text-capitalize font-italic text-white"><span class="text-primary">Vet</span>Dog</h1>
+            </a>
+            <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse justify-content-between px-3" id="navbarCollapse">
+                <div class="navbar-nav mr-auto py-0">
+                    <a href="LoginPersonal.html" class="nav-item nav-link">Inicio</a>
+                    <a href="clientes.html" class="nav-item nav-link">Clientes</a>
+                    <a href="ProductosOfrecidos.html" class="nav-item nav-link">Productos ofrecidos</a>
+                    <a href="provedores.html" class="nav-item nav-link">Proveedores</a>
+                    <a href="veterinarios.html" class="nav-item nav-link">Veterinarios</a>
+                    <a href="mascotas.html" class="nav-item nav-link">Mascotas</a>
+                    <a href="citas.html" class="nav-item nav-link">Citas</a>
+                    <a href="ventas.html" class="nav-item nav-link">Ventas</a>
+                </div>
+                <button id="generateReport" class="btn btn-lg btn-primary px-3 d-none d-lg-block">Generar Reporte</button>
+            </div>
+        </nav>
+    </div>
+    <!-- Navbar End -->
+
+    <div class="container">
+        <h2>Agendar Cita Veterinaria</h2>
+        <form id="appointment-form">
+            <div class="form-group">
+                <label for="ownerName">Nombre del Dueño:</label>
+                <input type="text" id="ownerName" name="ownerName" required>
+                <span class="description">Ingrese su nombre completo, como propietario de la mascota.</span>
+            </div>
+            <div class="form-group">
+                <label for="petName">Nombre de la Mascota:</label>
+                <input type="text" id="petName" name="petName" required>
+                <span class="description">Nombre que le ha dado a su mascota para que podamos identificarla fácilmente.</span>
+            </div>
+            <div class="form-group">
+                <label for="petType">Tipo de Mascota:</label>
+                <select id="petType" name="petType" required>
+                    <option value="">Seleccione...</option>
+                    <option value="Perro">Perro</option>
+                    <option value="Gato">Gato</option>
+                    <option value="Otro">Otro</option>
+                </select>
+                <span class="description">Indique si su mascota es un perro, gato o de otro tipo.</span>
+            </div>
+            <div class="form-group">
+                <label for="appointmentDate">Fecha de la Cita:</label>
+                <input type="date" id="appointmentDate" name="appointmentDate" required>
+                <span class="description">Seleccione la fecha en que desea programar la cita.</span>
+            </div>
+            <div class="form-group">
+                <label for="appointmentTime">Hora de la Cita:</label>
+                <input type="time" id="appointmentTime" name="appointmentTime" required>
+                <span class="description">Indique la hora preferida para su cita veterinaria.</span>
+            </div>
+            <div class="form-group">
+                <label for="reason">Motivo de la Cita:</label>
+                <textarea id="reason" name="reason" rows="4" required></textarea>
+                <span class="description">Describa brevemente el motivo de la cita (ej. chequeo, vacunación, consulta de enfermedad).</span>
+            </div>
+            <div class="form-group">
+                <label for="contactNumber">Número de Teléfono de Contacto:</label>
+                <input type="tel" id="contactNumber" name="contactNumber" required>
+                <span class="description">Proporcione un número de teléfono donde podamos contactarlo si es necesario.</span>
+            </div>
+            <div class="form-group">
+                <label for="email">Correo Electrónico:</label>
+                <input type="email" id="email" name="email" required>
+                <span class="description">Ingrese su correo electrónico para recibir confirmaciones y notificaciones sobre su cita.</span>
+            </div>
+            <button type="submit" class="btn-primary">Enviar Cita</button>
+        </form>
+    </div>
+
+    <script>
+        document.getElementById('appointment-form').addEventListener('submit', function(event) {
+            event.preventDefault();
+            alert("Cita agendada con éxito.");
+            this.reset();
+        });
+    </script>
+</body>
+
+</html>

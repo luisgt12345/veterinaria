@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="utf-8">
+    <title>VetDog - Inicio</title>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <meta content="Página de inicio de VetDog" name="keywords">
+    <meta content="Bienvenido a VetDog, tu clínica veterinaria de confianza" name="description">
+
+    <!-- Favicon -->
+    <link href="img/favicon.ico" rel="icon">
+
+    <!-- Google Web Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Nunito+Sans&family=Nunito:wght@600;700;800&display=swap" rel="stylesheet"> 
+
+    <!-- Font Awesome -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
+
+    <!-- Libraries Stylesheet -->
+    <link href="lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
+    <link href="lib/tempusdominus/css/tempusdominus-bootstrap-4.min.css" rel="stylesheet" />
+
+    <!-- Customized Bootstrap Stylesheet -->
+    <link href="css/style.css" rel="stylesheet">
+    <style>
+        /* Estilos personalizados */
+        .text-primary {
+            color: #87CEEB !important;
+        }
+        .btn-primary {
+            background-color: #87CEEB !important;
+            border-color: #87CEEB !important;
+        }
+        .btn-primary:hover {
+            background-color: #69b7da !important;
+            border-color: #69b7da !important;
+        }
+        .navbar-dark .navbar-nav .nav-link {
+            color: #ffffff;
+        }
+        .navbar-dark .navbar-nav .nav-link:hover {
+            color: #87CEEB;
+        }
+        .welcome-section {
+            background-color: #f9f9f9;
+            padding: 50px 0;
+            text-align: center;
+        }
+        .welcome-section h2 {
+            color: #87CEEB;
+            font-size: 36px;
+        }
+        .welcome-section p {
+            font-size: 18px;
+            color: #333;
+            margin-bottom: 30px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Navbar Start -->
+    <div class="container-fluid p-0">
+        <nav class="navbar navbar-expand-lg bg-dark navbar-dark py-3 py-lg-0 px-lg-5">
+            <a href="index.html" class="navbar-brand d-block d-lg-none">
+                <h1 class="m-0 display-5 text-capitalize font-italic text-white"><span class="text-primary">Vet</span>Dog</h1>
+            </a>
+            <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse justify-content-between px-3" id="navbarCollapse">
+                <div class="navbar-nav mr-auto py-0">
+                    <a href="LoginPersonal.html" class="nav-item nav-link">Inicio</a>
+                    <a href="ProductosOfrecidos.html" class="nav-item nav-link">Productos ofrecidos</a>
+                    <a href="clientes.html" class="nav-item nav-link">Clientes</a>
+                    <a href="provedores.html" class="nav-item nav-link">Proveedores</a>
+                    <a href="veterinarios.html" class="nav-item nav-link">Veterinarios</a>
+                    <a href="mascotas.html" class="nav-item nav-link">Mascotas</a>
+                    <a href="citas.html" class="nav-item nav-link">Citas</a>
+                    <a href="ventas.html" class="nav-item nav-link">Ventas</a>
+                </div>
+                <button id="generateReport" class="btn btn-lg btn-primary px-3 d-none d-lg-block">Generar Reporte</button>
+            </div>
+        </nav>
+    </div>
+    <!-- Navbar End -->
+
+    <!-- Welcome Section Start -->
+    <div class="container welcome-section">
+        <h2>Bienvenido a VetDog</h2>
+        <p>En VetDog, tu clínica veterinaria de confianza, nos dedicamos al cuidado integral de tu mascota. Ofrecemos servicios veterinarios, productos especializados y atención personalizada para garantizar la salud y el bienestar de tus compañeros peludos.</p>
+        <p>Hora local en Guatemala: <span id="hora"></span></p>
+        <div id="graficos">
+            <h3>Gráficos de Clientes Registrados</h3>
+            <!-- Aquí puedes insertar gráficos -->
+        </div>
+    </div>
+    <!-- Welcome Section End -->
+
+    <!-- Footer Inicio -->
+    <div class="container-fluid bg-dark text-white py-5 px-sm-3 px-md-5">
+        <div class="row pt-5">
+            <div class="col-lg-4 col-md-6 mb-5">
+                <p>En VetDog, ofrecemos soluciones integrales para el cuidado de tus mascotas, brindando servicios veterinarios y productos de calidad para garantizar su salud y bienestar.</p>
+            </div>
+            <div class="col-lg-4 col-md-6 mb-5">
+                <h3 class="text-primary mb-4">Contáctanos</h3>
+                <p><i class="fa fa-map-marker-alt mr-2"></i>123 Calle Principal, Ciudad, País</p>
+                <p><i class="fa fa-phone-alt mr-2"></i>+123 456 7890</p>
+                <p><i class="fa fa-envelope mr-2"></i>info@vetdog.com</p>
+            </div>
+        </div>
+    </div>
+    <!-- Footer Fin -->
+
+    <!-- Scroll to Top -->
+    <a href="#" class="btn btn-lg btn-primary back-to-top"><i class="fa fa-angle-double-up"></i></a>
+
+    <!-- JavaScript Libraries -->
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js"></script>
+    <script src="lib/easing/easing.min.js"></script>
+    <script src="lib/waypoints/waypoints.min.js"></script>
+    <script src="lib/owlcarousel/owl.carousel.min.js"></script>
+    <script src="lib/tempusdominus/js/moment.min.js"></script>
+    <script src="lib/tempusdominus/js/moment-timezone.min.js"></script>
+    <script src="lib/tempusdominus/js/tempusdominus-bootstrap-4.min.js"></script>
+
+    <!-- jsPDF Library -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.4.0/jspdf.umd.min.js"></script>
+
+    <script>
+        // Función para obtener la hora de Guatemala
+        function obtenerHoraGuatemala() {
+            const opciones = { timeZone: 'America/Guatemala', hour: '2-digit', minute: '2-digit', second: '2-digit' };
+            const fecha = new Date().toLocaleTimeString('es-GT', opciones);
+            document.getElementById('hora').innerText = fecha;
+        }
+        obtenerHoraGuatemala();
+        setInterval(obtenerHoraGuatemala, 1000);
+
+        // Generar PDF al hacer clic en el botón
+        document.getElementById('generateReport').addEventListener('click', function() {
+            const { jsPDF } = window.jspdf;
+            const doc = new jsPDF();
+
+            // Obtener el contenido de la página
+            const contenido = document.body.innerHTML;
+
+            // Añadir contenido al PDF
+            doc.fromHTML(contenido, 15, 15, {
+                'width': 170,
+                'elementHandlers': {}
+            });
+
+            // Generar el Blob y abrirlo en una nueva pestaña
+            const pdfBlob = doc.output('blob');
+            const pdfUrl = URL.createObjectURL(pdfBlob);
+            window.open(pdfUrl);
+        });
+    </script>
+
+    <!-- Template Javascript -->
+    <script src="js/main.js"></script>
+
+</body>
+
+</html>

@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="utf-8">
+    <title>VetDog - Inicio</title>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <meta content="Página de inicio de VetDog" name="keywords">
+    <meta content="Bienvenido a VetDog, tu clínica veterinaria de confianza" name="description">
+
+    <!-- Favicon -->
+    <link href="img/favicon.ico" rel="icon">
+
+    <!-- Google Web Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Nunito+Sans&family=Nunito:wght@600;700;800&display=swap" rel="stylesheet"> 
+
+    <!-- Font Awesome -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
+
+    <!-- Flaticon Font -->
+    <link href="lib/flaticon/font/flaticon.css" rel="stylesheet">
+
+    <!-- Libraries Stylesheet -->
+    <link href="lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
+    <link href="lib/tempusdominus/css/tempusdominus-bootstrap-4.min.css" rel="stylesheet" />
+
+    <!-- Customized Bootstrap Stylesheet -->
+    <link href="css/style.css" rel="stylesheet">
+    <style>
+        /* Estilos personalizados */
+        .text-primary {
+            color: #87CEEB !important;
+        }
+        .btn-primary {
+            background-color: #87CEEB !important;
+            border-color: #87CEEB !important;
+        }
+        .btn-primary:hover {
+            background-color: #69b7da !important;
+            border-color: #69b7da !important;
+        }
+        .navbar-dark .navbar-nav .nav-link {
+            color: #ffffff;
+        }
+        .navbar-dark .navbar-nav .nav-link:hover {
+            color: #87CEEB;
+        }
+        .welcome-section {
+            background-color: #f9f9f9;
+            padding: 50px 0;
+            text-align: center;
+        }
+        .welcome-section h2 {
+            color: #87CEEB;
+            font-size: 36px;
+        }
+        .welcome-section p {
+            font-size: 18px;
+            color: #333;
+            margin-bottom: 30px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Navbar Start -->
+    <div class="container-fluid p-0">
+        <nav class="navbar navbar-expand-lg bg-dark navbar-dark py-3 py-lg-0 px-lg-5">
+            <a href="index.html" class="navbar-brand d-block d-lg-none">
+                <h1 class="m-0 display-5 text-capitalize font-italic text-white"><span class="text-primary">Vet</span>Dog</h1>
+            </a>
+            <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse justify-content-between px-3" id="navbarCollapse">
+                <div class="navbar-nav mr-auto py-0">
+                    <a href="LoginPersonal.html" class="nav-item nav-link">Inicio</a>
+                    <a href="clientes.html" class="nav-item nav-link">Clientes</a>
+                    <a href="ProductosOfrecidos.html" class="nav-item nav-link">Productos ofrecidos</a>
+                    <a href="provedores.html" class="nav-item nav-link">Proveedores</a>
+                    <a href="veterinarios.html" class="nav-item nav-link">Veterinarios</a>
+                    <a href="mascotas.html" class="nav-item nav-link">Mascotas</a>
+                    <a href="citas.html" class="nav-item nav-link">Citas</a>
+                    <a href="ventas.html" class="nav-item nav-link">Ventas</a>
+                </div>
+                <button id="generateReport" class="btn btn-lg btn-primary px-3 d-none d-lg-block">Generar Reporte</button>
+            </div>
+        </nav>
+    </div>
+    <!-- Navbar End -->
+
+    <!-- Ventas Section Start -->
+    <div class="container">
+        <h2 class="text-primary mt-4">Registro de Ventas</h2>
+
+        <div class="mb-4">
+            <label for="saleProduct">Producto vendido:</label>
+            <input type="text" id="saleProduct" placeholder="Nombre del Producto" class="form-control" />
+            <label for="saleAmount">Cantidad:</label>
+            <input type="number" id="saleAmount" placeholder="Cantidad vendida" class="form-control" />
+            <label for="salePrice">Precio:</label>
+            <input type="number" id="salePrice" placeholder="Precio por unidad" class="form-control" />
+            <button id="addSaleButton" class="btn btn-primary mt-2">Agregar Venta</button>
+        </div>
+
+        <h4>Ventas Registradas</h4>
+        <table class="table table-striped" id="salesTable">
+            <thead>
+                <tr>
+                    <th>Producto</th>
+                    <th>Cantidad</th>
+                    <th>Precio</th>
+                    <th>Total</th>
+                    <th>Fecha</th>
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- Ventas se llenarán aquí -->
+            </tbody>
+        </table>
+
+        <div class="chart-container" id="chartContainer">
+            <!-- Aquí se mostrarán gráficos en vivo -->
+            <canvas id="salesChart"></canvas>
+        </div>
+    </div>
+    <!-- Ventas Section End -->
+
+    <!-- JavaScript Libraries -->
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script src="lib/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+        const salesTableBody = document.getElementById('salesTable').querySelector('tbody');
+        const salesChartCtx = document.getElementById('salesChart').getContext('2d');
+        
+        let salesData = [];
+        let salesChart;
+
+        // Función para agregar ventas
+        document.getElementById('addSaleButton').addEventListener('click', function() {
+            const product = document.getElementById('saleProduct').value;
+            const amount = parseInt(document.getElementById('saleAmount').value);
+            const price = parseFloat(document.getElementById('salePrice').value);
+            const total = amount * price;
+            const date = new Date().toLocaleString();
+
+            const sale = { product, amount, price, total, date };
+            salesData.push(sale);
+            updateSalesTable();
+            updateChart();
+            resetForm();
+        });
+
+        // Función para eliminar una venta
+        function deleteSale(index) {
+            salesData.splice(index, 1);
+            updateSalesTable();
+            updateChart();
+        }
+
+        // Función para actualizar la tabla de ventas
+        function updateSalesTable() {
+            salesTableBody.innerHTML = '';
+            salesData.forEach((sale, index) => {
+                const row = `<tr>
+                    <td>${sale.product}</td>
+                    <td>${sale.amount}</td>
+                    <td>${sale.price.toFixed(2)}</td>
+                    <td>${sale.total.toFixed(2)}</td>
+                    <td>${sale.date}</td>
+                    <td>
+                        <button class="btn btn-danger" onclick="deleteSale(${index})">Eliminar</button>
+                    </td>
+                </tr>`;
+                salesTableBody.insertAdjacentHTML('beforeend', row);
+            });
+        }
+
+        // Función para actualizar el gráfico
+        function updateChart() {
+            const labels = salesData.map(sale => sale.product);
+            const data = salesData.map(sale => sale.total);
+
+            if (salesChart) {
+                salesChart.destroy();
+            }
+
+            salesChart = new Chart(salesChartCtx, {
+                type: 'bar',
+                data: {
+                    labels: labels,
+                    datasets: [{
+                        label: 'Ventas Totales',
+                        data: data,
+                        backgroundColor: 'rgba(135, 206, 235, 0.5)',
+                        borderColor: 'rgba(135, 206, 235, 1)',
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    scales: {
+                        y: {
+                            beginAtZero: true
+                        }
+                    }
+                }
+            });
+        }
+
+        // Función para restablecer el formulario
+        function resetForm() {
+            document.getElementById('saleProduct').value = '';
+            document.getElementById('saleAmount').value = '';
+            document.getElementById('salePrice').value = '';
+        }
+    </script>
+</body>
+
+</html>

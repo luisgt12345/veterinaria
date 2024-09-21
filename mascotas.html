@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="utf-8">
+    <title>VetDog - Inicio</title>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <meta content="Página de inicio de VetDog" name="keywords">
+    <meta content="Bienvenido a VetDog, tu clínica veterinaria de confianza" name="description">
+
+    <!-- Favicon -->
+    <link href="img/favicon.ico" rel="icon">
+
+    <!-- Google Web Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Nunito+Sans&family=Nunito:wght@600;700;800&display=swap" rel="stylesheet"> 
+
+    <!-- Font Awesome -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
+
+    <!-- Flaticon Font -->
+    <link href="lib/flaticon/font/flaticon.css" rel="stylesheet">
+
+    <!-- Libraries Stylesheet -->
+    <link href="lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
+    <link href="lib/tempusdominus/css/tempusdominus-bootstrap-4.min.css" rel="stylesheet" />
+
+    <!-- Customized Bootstrap Stylesheet -->
+    <link href="css/style.css" rel="stylesheet">
+    <style>
+        /* Estilos personalizados */
+        .text-primary {
+            color: #87CEEB !important;
+        }
+        .btn-primary {
+            background-color: #87CEEB !important;
+            border-color: #87CEEB !important;
+        }
+        .btn-primary:hover {
+            background-color: #69b7da !important;
+            border-color: #69b7da !important;
+        }
+        .navbar-dark .navbar-nav .nav-link {
+            color: #ffffff;
+        }
+        .navbar-dark .navbar-nav .nav-link:hover {
+            color: #87CEEB;
+        }
+        .welcome-section {
+            background-color: #f9f9f9;
+            padding: 50px 0;
+            text-align: center;
+        }
+        .welcome-section h2 {
+            color: #87CEEB;
+            font-size: 36px;
+        }
+        .welcome-section p {
+            font-size: 18px;
+            color: #333;
+            margin-bottom: 30px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Navbar Start -->
+    <div class="container-fluid p-0">
+        <nav class="navbar navbar-expand-lg bg-dark navbar-dark py-3 py-lg-0 px-lg-5">
+            <a href="index.html" class="navbar-brand d-block d-lg-none">
+                <h1 class="m-0 display-5 text-capitalize font-italic text-white"><span class="text-primary">Vet</span>Dog</h1>
+            </a>
+            <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse justify-content-between px-3" id="navbarCollapse">
+                <div class="navbar-nav mr-auto py-0">
+                    <a href="LoginPersonal.html" class="nav-item nav-link">Inicio</a>
+                    <a href="clientes.html" class="nav-item nav-link">Clientes</a>
+                    <a href="ProductosOfrecidos.html" class="nav-item nav-link">Productos ofrecidos</a>
+                    <a href="provedores.html" class="nav-item nav-link">Proveedores</a>
+                    <a href="veterinarios.html" class="nav-item nav-link">Veterinarios</a>
+                    <a href="mascotas.html" class="nav-item nav-link">Mascotas</a>
+                    <a href="citas.html" class="nav-item nav-link">Citas</a>
+                    <a href="ventas.html" class="nav-item nav-link">Ventas</a>
+                </div>
+                <button id="generateReport" class="btn btn-lg btn-primary px-3 d-none d-lg-block">Generar Reporte</button>
+            </div>
+        </nav>
+    </div>
+    <!-- Navbar End -->
+
+
+    <!-- Mascotas Section Start -->
+    <div class="container">
+        <h2 class="text-primary mt-4">Registro de Mascotas</h2>
+
+        <form id="addPetForm" class="mb-4">
+            <input type="text" id="petName" placeholder="Nombre del Perro" required class="form-control mb-2" />
+            <input type="text" id="petBreed" placeholder="Raza" required class="form-control mb-2" />
+            <input type="number" id="petAge" placeholder="Edad (años)" required class="form-control mb-2" />
+            <input type="text" id="petOwner" placeholder="Nombre del Dueño" required class="form-control mb-2" />
+            <label>
+                <input type="checkbox" id="petTreated" /> ¿Ha sido atendido y tratado?
+            </label>
+            <button type="submit" class="btn btn-primary">Registrar Mascota</button>
+        </form>
+
+        <table class="table table-striped mt-3" id="petTable">
+            <thead>
+                <tr>
+                    <th>Nombre</th>
+                    <th>Raza</th>
+                    <th>Edad</th>
+                    <th>Dueño</th>
+                    <th>Tratado</th>
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- Mascotas se llenarán aquí -->
+            </tbody>
+        </table>
+    </div>
+    <!-- Mascotas Section End -->
+
+    <!-- JavaScript Libraries -->
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script src="lib/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script>
+        const petForm = document.getElementById('addPetForm');
+        const petTableBody = document.getElementById('petTable').querySelector('tbody');
+
+        // Cargar mascotas desde el almacenamiento local
+        function loadPets() {
+            const pets = JSON.parse(localStorage.getItem('pets')) || [];
+            pets.forEach(pet => {
+                addPetRow(pet);
+            });
+        }
+
+        // Agregar mascota a la tabla
+        function addPetRow(pet) {
+            const row = `<tr>
+                <td>${pet.name}</td>
+                <td>${pet.breed}</td>
+                <td>${pet.age}</td>
+                <td>${pet.owner}</td>
+                <td>${pet.treated ? 'Sí' : 'No'}</td>
+                <td>
+                    <button class="btn btn-warning btn-sm" onclick='editPet("${pet.name}")'>Modificar</button>
+                    <button class="btn btn-danger btn-sm" onclick='deletePet("${pet.name}")'>Eliminar</button>
+                </td>
+            </tr>`;
+            petTableBody.insertAdjacentHTML('beforeend', row);
+        }
+
+        // Manejar la adición de mascotas
+        petForm.addEventListener('submit', function(event) {
+            event.preventDefault();
+            const newPet = {
+                name: document.getElementById('petName').value,
+                breed: document.getElementById('petBreed').value,
+                age: document.getElementById('petAge').value,
+                owner: document.getElementById('petOwner').value,
+                treated: document.getElementById('petTreated').checked
+            };
+            const pets = JSON.parse(localStorage.getItem('pets')) || [];
+            pets.push(newPet);
+            localStorage.setItem('pets', JSON.stringify(pets));
+            addPetRow(newPet);
+            petForm.reset();
+        });
+
+        // Editar mascota
+        function editPet(name) {
+            const pets = JSON.parse(localStorage.getItem('pets')) || [];
+            const pet = pets.find(p => p.name === name);
+            if (pet) {
+                document.getElementById('petName').value = pet.name;
+                document.getElementById('petBreed').value = pet.breed;
+                document.getElementById('petAge').value = pet.age;
+                document.getElementById('petOwner').value = pet.owner;
+                document.getElementById('petTreated').checked = pet.treated;
+                deletePet(name); // Eliminar de la lista actual para evitar duplicados al agregar
+            }
+        }
+
+        // Eliminar mascota
+        function deletePet(name) {
+            let pets = JSON.parse(localStorage.getItem('pets')) || [];
+            pets = pets.filter(pet => pet.name !== name);
+            localStorage.setItem('pets', JSON.stringify(pets));
+            loadPets(); // Recargar lista
+            petTableBody.innerHTML = ''; // Limpiar la tabla antes de volver a cargar
+            loadPets(); // Cargar de nuevo la lista actualizada
+        }
+
+        // Cargar mascotas al inicio
+        loadPets();
+    </script>
+</body>
+
+</html>

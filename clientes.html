@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="utf-8">
+    <title>VetDog - Inicio</title>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <meta content="Página de inicio de VetDog" name="keywords">
+    <meta content="Bienvenido a VetDog, tu clínica veterinaria de confianza" name="description">
+
+    <!-- Favicon -->
+    <link href="img/favicon.ico" rel="icon">
+
+    <!-- Google Web Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Nunito+Sans&family=Nunito:wght@600;700;800&display=swap" rel="stylesheet"> 
+
+    <!-- Font Awesome -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
+
+    <!-- Flaticon Font -->
+    <link href="lib/flaticon/font/flaticon.css" rel="stylesheet">
+
+    <!-- Libraries Stylesheet -->
+    <link href="lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
+    <link href="lib/tempusdominus/css/tempusdominus-bootstrap-4.min.css" rel="stylesheet" />
+
+    <!-- Customized Bootstrap Stylesheet -->
+    <link href="css/style.css" rel="stylesheet">
+    <style>
+        /* Estilos personalizados */
+        .text-primary {
+            color: #87CEEB !important;
+        }
+        .btn-primary {
+            background-color: #87CEEB !important;
+            border-color: #87CEEB !important;
+        }
+        .btn-primary:hover {
+            background-color: #69b7da !important;
+            border-color: #69b7da !important;
+        }
+        .navbar-dark .navbar-nav .nav-link {
+            color: #ffffff;
+        }
+        .navbar-dark .navbar-nav .nav-link:hover {
+            color: #87CEEB;
+        }
+        .welcome-section {
+            background-color: #f9f9f9;
+            padding: 50px 0;
+            text-align: center;
+        }
+        .welcome-section h2 {
+            color: #87CEEB;
+            font-size: 36px;
+        }
+        .welcome-section p {
+            font-size: 18px;
+            color: #333;
+            margin-bottom: 30px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Navbar Start -->
+    <div class="container-fluid p-0">
+        <nav class="navbar navbar-expand-lg bg-dark navbar-dark py-3 py-lg-0 px-lg-5">
+            <a href="index.html" class="navbar-brand d-block d-lg-none">
+                <h1 class="m-0 display-5 text-capitalize font-italic text-white"><span class="text-primary">Vet</span>Dog</h1>
+            </a>
+            <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse justify-content-between px-3" id="navbarCollapse">
+                <div class="navbar-nav mr-auto py-0">
+                    <a href="LoginPersonal.html" class="nav-item nav-link">Inicio</a>
+                    <a href="clientes.html" class="nav-item nav-link">Clientes</a>
+                    <a href="ProductosOfrecidos.html" class="nav-item nav-link">Productos ofrecidos</a>
+                    <a href="provedores.html" class="nav-item nav-link">Proveedores</a>
+                    <a href="veterinarios.html" class="nav-item nav-link">Veterinarios</a>
+                    <a href="mascotas.html" class="nav-item nav-link">Mascotas</a>
+                    <a href="citas.html" class="nav-item nav-link">Citas</a>
+                    <a href="ventas.html" class="nav-item nav-link">Ventas</a>
+                </div>
+                <button id="generateReport" class="btn btn-lg btn-primary px-3 d-none d-lg-block">Generar Reporte</button>
+            </div>
+        </nav>
+    </div>
+    <!-- Navbar End -->
+
+    <!-- Clientes Section Start -->
+    <div class="container">
+        <h2 class="text-primary mt-4">Clientes</h2>
+
+        <form id="addClientForm" class="mb-4">
+            <input type="text" id="ownerName" placeholder="Nombre del Dueño" required class="form-control mb-2" />
+            <input type="text" id="petName" placeholder="Nombre de la Mascota" required class="form-control mb-2" />
+            <select id="petType" class="form-control mb-2" required>
+                <option value="">Seleccione el Tipo de Mascota</option>
+                <option value="Perro">Perro</option>
+                <option value="Gato">Gato</option>
+                <option value="Otro">Otro</option>
+            </select>
+            <input type="date" id="appointmentDate" required class="form-control mb-2" />
+            <input type="time" id="appointmentTime" required class="form-control mb-2" />
+            <textarea id="appointmentReason" placeholder="Motivo de la Cita" required class="form-control mb-2"></textarea>
+            <input type="tel" id="contactNumber" placeholder="Número de Teléfono de Contacto" required class="form-control mb-2" />
+            <input type="email" id="email" placeholder="Correo Electrónico" required class="form-control mb-2" />
+            <button type="submit" class="btn btn-primary">Registrar Cliente</button>
+        </form>
+
+        <table class="table table-striped mt-3" id="clientTable">
+            <thead>
+                <tr>
+                    <th>Nombre del Dueño</th>
+                    <th>Nombre de la Mascota</th>
+                    <th>Tipo de Mascota</th>
+                    <th>Fecha de la Cita</th>
+                    <th>Hora de la Cita</th>
+                    <th>Motivo de la Cita</th>
+                    <th>Teléfono</th>
+                    <th>Email</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- Clientes se llenarán aquí -->
+            </tbody>
+        </table>
+    </div>
+    <!-- Clientes Section End -->
+
+    <!-- JavaScript Libraries -->
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script src="lib/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script>
+        const clientForm = document.getElementById('addClientForm');
+        const clientTableBody = document.getElementById('clientTable').querySelector('tbody');
+
+        // Cargar clientes desde el almacenamiento local
+        function loadClients() {
+            const clients = JSON.parse(localStorage.getItem('clients')) || [];
+            clients.forEach(client => {
+                addClientRow(client);
+            });
+        }
+
+        // Agregar cliente a la tabla
+        function addClientRow(client) {
+            const row = `<tr>
+                <td>${client.ownerName}</td>
+                <td>${client.petName}</td>
+                <td>${client.petType}</td>
+                <td>${client.appointmentDate}</td>
+                <td>${client.appointmentTime}</td>
+                <td>${client.appointmentReason}</td>
+                <td>${client.contactNumber}</td>
+                <td>${client.email}</td>
+            </tr>`;
+            clientTableBody.insertAdjacentHTML('beforeend', row);
+        }
+
+        // Manejar la adición de clientes
+        clientForm.addEventListener('submit', function(event) {
+            event.preventDefault();
+            const newClient = {
+                ownerName: document.getElementById('ownerName').value,
+                petName: document.getElementById('petName').value,
+                petType: document.getElementById('petType').value,
+                appointmentDate: document.getElementById('appointmentDate').value,
+                appointmentTime: document.getElementById('appointmentTime').value,
+                appointmentReason: document.getElementById('appointmentReason').value,
+                contactNumber: document.getElementById('contactNumber').value,
+                email: document.getElementById('email').value
+            };
+            const clients = JSON.parse(localStorage.getItem('clients')) || [];
+            clients.push(newClient);
+            localStorage.setItem('clients', JSON.stringify(clients));
+            addClientRow(newClient);
+            clientForm.reset();
+        });
+
+        // Cargar clientes al inicio
+        loadClients();
+    </script>
+</body>
+
+</html>
